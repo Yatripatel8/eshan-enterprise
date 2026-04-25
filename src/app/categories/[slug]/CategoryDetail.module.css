@@ -1,0 +1,142 @@
+.categoryHero {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1920');
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+  color: white;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.heroContent h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+}
+
+.breadcrumb {
+  font-size: 0.9rem;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.breadcrumb span {
+  color: white;
+}
+
+.introSection {
+  background: white;
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.introText h6 {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.introText h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+}
+
+.introText p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.feature span {
+  color: var(--primary);
+}
+
+.sideImg {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.sectionHeader h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.titleLine {
+  width: 60px;
+  height: 3px;
+  background: var(--primary);
+  margin: 0 auto;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.noProducts {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.noProducts p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+@media (max-width: 1200px) {
+  .productGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 991px) {
+  .introGrid { grid-template-columns: 1fr; gap: 40px; }
+  .productGrid { grid-template-columns: repeat(2, 1fr); }
+  .heroContent h1 { font-size: 2.5rem; }
+}
+
+@media (max-width: 600px) {
+  .productGrid { grid-template-columns: 1fr; }
+}
