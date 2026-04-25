@@ -1,0 +1,39 @@
+.legalPage {
+  background-color: var(--bg-primary);
+}
+
+.header {
+  background: var(--secondary);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.header p {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.content {
+  max-width: 800px;
+  margin-bottom: 50px;
+}
+
+.content h2 {
+  font-size: 1.5rem;
+  margin: 40px 0 20px;
+  color: var(--secondary);
+}
+
+.content p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}

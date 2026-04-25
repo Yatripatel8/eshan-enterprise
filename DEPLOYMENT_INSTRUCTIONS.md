@@ -28,7 +28,7 @@ You need to upload the contents of the **`.next/standalone`** folder to your Hos
 3. **Environment Variables**: Add the following variables in your Hostinger dashboard:
    - `NODE_ENV`: `production`
    - `NEXT_PUBLIC_SUPABASE_URL`: (Your Supabase URL)
-   - `NEXT_PUBLIC_SUPABASE_ANNON_KEY`: (Your Supabase Anon Key)
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: (Your Supabase Anon Key)
    - `PORT`: `3000` (or whatever Hostinger assigns)
 
 ## 4. Why this setup?
