@@ -1,29 +1,23 @@
-import { supabase } from "@/lib/supabase";
+import prisma from "@/lib/prisma";
 
 export async function getCategories() {
-    const { data, error } = await supabase
-        .from("categories")
-        .select("*");
-
-    if (error) {
-        console.error("Error fetching categories:", error.message || error);
-        return [];
-    }
-
-    return data;
+  try {
+    return await prisma.category.findMany({
+      orderBy: { name: 'asc' }
+    });
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
 }
 
 export async function getCategoryBySlug(slug: string) {
-    const { data, error } = await supabase
-        .from("categories")
-        .select("*")
-        .eq("slug", slug)
-        .single();
-
-    if (error) {
-        console.error(`Error fetching category ${slug}:`, error);
-        return null;
-    }
-
-    return data;
+  try {
+    return await prisma.category.findUnique({
+      where: { slug }
+    });
+  } catch (error) {
+    console.error(`Error fetching category ${slug}:`, error);
+    return null;
+  }
 }

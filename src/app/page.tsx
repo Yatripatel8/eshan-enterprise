@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { products, categories } from '@/data/products';
+import { getFeaturedProducts } from '@/lib/productService';
+import { getCategories } from '@/lib/categoryService';
 import ProductCard from '@/components/ProductCard';
 import styles from './Home.module.css';
 
-export default function Home() {
-  const featuredProducts = products.slice(0, 4);
-  const displayCategories = categories.map((cat, index) => ({
-    ...cat,
-    image: products.find(p => p.categorySlug === cat.slug)?.image || 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800'
-  }));
+export const dynamic = 'force-dynamic';
+
+export default async function Home() {
+  const [featuredProducts, categories] = await Promise.all([
+    getFeaturedProducts(),
+    getCategories()
+  ]);
 
   return (
     <div className={styles.home}>
@@ -24,71 +26,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust Bar */}
-      <section className={styles.trustBar}>
-        <div className={`container ${styles.trustGrid}`}>
-          <div className={styles.trustItem}>
-            <div className={styles.trustIcon}></div>
-            <div>
-              <h3>100% Original</h3>
-              <p>Original Products</p>
-            </div>
-          </div>
-          <div className={styles.trustItem}>
-            <div className={styles.trustIcon}></div>
-            <div>
-              <h3>Quality You Can Trust</h3>
-              <p>We stand behind every product</p>
-            </div>
-          </div>
-          <div className={styles.trustItem}>
-            <div className={styles.trustIcon}></div>
-            <div>
-              <h3>Always Reachable</h3>
-              <p>Quick replies, no bots</p>
-            </div>
-          </div>
-          <div className={styles.trustItem}>
-            <div className={styles.trustIcon}></div>
-            <div>
-              <h3>Customer First</h3>
-              <p>Your satisfaction is our priority</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
-      {/* About Preview */}
-      <section className={`section ${styles.aboutPreview}`}>
-        <div className={`container ${styles.aboutGrid}`}>
-          <div className={styles.aboutImage}>
-            <img src="images/premium-product.jpg" alt="About Eshan Enterprise" />
-            <div className={styles.aboutBadge}>100% Original Products</div>
-          </div>
-          <div className={styles.aboutContent}>
-            <h6>About Us</h6>
-            <h2>Premium Bathroom Shelves & Accessories Manufacturer</h2>
-            <p>At Eshan Enterprise, we believe that every bathroom deserves a perfect blend of functionality and elegance. As a dedicated manufacturer of premium bathroom shelves and accessories, we design products that elevate everyday spaces into refined experiences.</p>
-            <Link href="/about" className="btn btn-outline">Read Our Story</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Category Grid */}
-      <section className={`section ${styles.categoriesSection}`}>
+      {/* Categories Preview */}
+      <section className="section bg-light">
         <div className="container">
-          <div className={styles.sectionHeader}>
-            <h6>Our Collection</h6>
-            <h2>Shop By Categories</h2>
+          <div className="section-header text-center">
+            <h6>Our Collections</h6>
+            <h2>Shop by Category</h2>
           </div>
           <div className={styles.categoryGrid}>
-            {displayCategories.map((cat) => (
-              <Link key={cat.name} href={`/categories/${cat.slug}`} className={styles.categoryCard}>
-                <div className={styles.categoryImgWrapper}>
-                  <img src={cat.image} alt={cat.name} />
-                  <div className={styles.categoryOverlay}>
-                    <span>View All</span>
-                  </div>
+            {categories.map((cat) => (
+              <Link key={cat.id} href={`/categories/${cat.slug}`} className={styles.categoryCard}>
+                <div className={styles.categoryImg}>
+                  <img src={cat.image || '/images/category-img.jpg'} alt={cat.name} />
                 </div>
                 <h3>{cat.name}</h3>
               </Link>
@@ -98,21 +49,24 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className={`section ${styles.featuredSection}`} style={{ backgroundColor: 'var(--bg-alt)' }}>
+      <section className="section">
         <div className="container">
-          <div className={styles.sectionHeader}>
-            <h6>Top Picks</h6>
-            <h2>Featured Products</h2>
+          <div className="section-header">
+            <div>
+              <h6>Trending Now</h6>
+              <h2>Featured Products</h2>
+            </div>
+            <Link href="/categories" className="btn btn-outline">View All</Link>
           </div>
           <div className={styles.productGrid}>
             {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product as any} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Who We Are */}
+       {/* Who We Are */}
       <section className={styles.infoSection}>
         <div className="container">
           <div className={styles.infoGrid}>
@@ -180,15 +134,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className={styles.ctaBanner}>
-        <div className="container">
-          <h2>Ready to Transform Your Space?</h2>
-          <p>Contact us today for bath solutions for your space.</p>
-          <a href="https://wa.me/919825988354?text=Hi, I am interested in your products." target="_blank" rel="noopener noreferrer" className="btn btn-primary">Get In Touch</a>
         </div>
       </section>
     </div>

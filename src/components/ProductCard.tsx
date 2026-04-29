@@ -1,20 +1,23 @@
 import Link from 'next/link';
-import { Product } from '@/data/products';
 import styles from './ProductCard.module.css';
 
-interface ProductProps {
-  product: Product;
+interface Product {
+  id: string;
+  name: string;
+  image: string | null;
+  shortDescription?: string | null;
 }
 
-export default function ProductCard({ product }: ProductProps) {
+export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className={styles.productCard}>
       <div className={styles.productImg}>
-        <img src={product.image} alt={product.name} />
+        {product.image
+          ? <img src={product.image} alt={product.name} />
+          : <div className={styles.noImage}><span>No Image</span></div>}
       </div>
       <div className={styles.productInfo}>
         <h3>{product.name}</h3>
-        {/* <p className={styles.price}>{product.price}</p> */}
         <Link href={`/product/${product.id}`} className={styles.viewBtn}>View Details</Link>
       </div>
     </div>

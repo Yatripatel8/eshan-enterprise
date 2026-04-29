@@ -24,6 +24,19 @@
   box-shadow: var(--shadow-lg);
 }
 
+.noImage {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--bg-alt);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  border: 1px dashed var(--border-color);
+}
+
 .productInfo h6 {
   color: var(--primary);
   text-transform: uppercase;

@@ -1,0 +1,265 @@
+/* ─── Shared admin font override ─── */
+.page,
+.page * {
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Page layout ─── */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ─── Page header ─── */
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pageTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.pageSubtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ─── Buttons ─── */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.btnPrimary:hover {
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: #fff;
+  color: #374151;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.btnOutline:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #374151;
+}
+
+/* ─── Stats grid ─── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statCard {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBlue  { background: #eff6ff; color: #2563eb; }
+.iconPurple { background: #f5f3ff; color: #7c3aed; }
+.iconOrange { background: #fff7ed; color: #ea580c; }
+
+.statBody {}
+
+.statName {
+  font-size: 12.5px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.statValue {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+/* ─── Card ─── */
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.cardLink {
+  font-size: 13px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.cardLink:hover {
+  color: #1d4ed8;
+}
+
+/* ─── Product list ─── */
+.productList {}
+
+.productRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 24px;
+  border-bottom: 1px solid #f8fafc;
+  transition: background 0.1s;
+}
+
+.productRow:last-child {
+  border-bottom: none;
+}
+
+.productRow:hover {
+  background: #f8fafc;
+}
+
+.productThumb {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productPlaceholder {
+  color: #94a3b8;
+}
+
+.productInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.productName {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productCategory {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.productDate {
+  font-size: 12px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+/* ─── Empty state ─── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  color: #cbd5e1;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: #64748b;
+}

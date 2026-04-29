@@ -5,18 +5,13 @@ import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
-const categories = [
-  'Stainless steel napkin holder',
-  'Bathroom shelf',
-  'Stainless steel towel rack',
-  'Stainless steel soap dish',
-  'Stainless steel tumbler',
-  'Stainless steel toilet paper holder',
-  'Liquid dispenser',
-  'ABS mirror cabinet',
-];
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+}
 
-export default function Navbar() {
+export default function Navbar({ categories = [] }: { categories?: Category[] }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCatOpen, setIsCatOpen] = useState(false);
@@ -24,20 +19,14 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Close menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
     setIsCatOpen(false);
     setIsDesktopCatOpen(false);
   }, [pathname]);
 
-  // Prevent scroll when menu is open
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
   }, [isMenuOpen]);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -55,32 +44,33 @@ export default function Navbar() {
       <nav className={styles.navbar}>
         <div className={`container ${styles.navContainer}`}>
           <Link href="/" className={styles.logo}>
-            {/* <h1>ESHAN<span>ENTERPRISE</span></h1> */}
-            <img src="images/logo-eshan.svg" width={150} height={120} alt="" />
+            <img src="images/logo-eshan.svg" width={150} height={120} alt="Eshan Enterprise" />
           </Link>
 
           {/* Desktop Links */}
           <ul className={styles.navLinks}>
             <li><Link href="/">Home</Link></li>
-            <li 
+            <li
               className={styles.dropdown}
               onMouseEnter={() => setIsDesktopCatOpen(true)}
               onMouseLeave={() => setIsDesktopCatOpen(false)}
             >
               <Link href="/categories">Our Categories</Link>
-              <div className={`${styles.megaMenu} ${isDesktopCatOpen ? styles.showMega : ''}`}>
-                <div className={styles.megaGrid}>
-                  {categories.map((cat) => (
-                    <Link 
-                      key={cat} 
-                      href={`/categories/${cat.toLowerCase().replace(/ /g, '-')}`}
-                      onClick={() => setIsDesktopCatOpen(false)}
-                    >
-                      {cat}
-                    </Link>
-                  ))}
+              {categories.length > 0 && (
+                <div className={`${styles.megaMenu} ${isDesktopCatOpen ? styles.showMega : ''}`}>
+                  <div className={styles.megaGrid}>
+                    {categories.map((cat) => (
+                      <Link
+                        key={cat.id}
+                        href={`/categories/${cat.slug}`}
+                        onClick={() => setIsDesktopCatOpen(false)}
+                      >
+                        {cat.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </li>
             <li><Link href="/about">About Us</Link></li>
             <li><Link href="/contact">Contact Us</Link></li>
@@ -96,12 +86,20 @@ export default function Navbar() {
                 className={styles.searchInput}
               />
               <button type="submit" className={styles.navIcon}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
               </button>
             </form>
-            <a href="https://wa.me/919825988354?text=Hi, I am interested in your products." target="_blank" rel="noopener noreferrer" className={`btn btn-primary ${styles.desktopBtn}`}>Enquire Now</a>
+            <a
+              href="https://wa.me/919825988354?text=Hi, I am interested in your products."
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`btn btn-primary ${styles.desktopBtn}`}
+            >
+              Enquire Now
+            </a>
 
-            {/* Hamburger Toggle */}
             <button
               className={`${styles.hamburger} ${isMenuOpen ? styles.open : ''}`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -119,7 +117,7 @@ export default function Navbar() {
       <div className={`${styles.mobileDrawer} ${isMenuOpen ? styles.drawerOpen : ''}`}>
         <div className={styles.drawerHeader}>
           <Link href="/" className={styles.logo}>
-            <h1>ESHAN<span>ENTERPRISE</span></h1>
+            <img src="images/logo-eshan.svg" width={130} height={100} alt="Eshan Enterprise" />
           </Link>
           <button className={styles.closeBtn} onClick={() => setIsMenuOpen(false)}>&times;</button>
         </div>
@@ -139,28 +137,34 @@ export default function Navbar() {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/about">About Us</Link></li>
             <li><Link href="/contact">Contact Us</Link></li>
-            <li className={styles.drawerSection}>
-              <button
-                className={`${styles.accordionToggle} ${isCatOpen ? styles.active : ''}`}
-                onClick={() => setIsCatOpen(!isCatOpen)}
-              >
-                Our Categories
-                <span className={styles.arrow}>{isCatOpen ? '−' : '+'}</span>
-              </button>
-              <ul className={`${styles.mobileCategoryList} ${isCatOpen ? styles.catOpen : ''}`}>
-                {categories.map((cat) => (
-                  <li key={cat}>
-                    <Link href={`/categories/${cat.toLowerCase().replace(/ /g, '-')}`}>
-                      {cat}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </li>
+            {categories.length > 0 && (
+              <li className={styles.drawerSection}>
+                <button
+                  className={`${styles.accordionToggle} ${isCatOpen ? styles.active : ''}`}
+                  onClick={() => setIsCatOpen(!isCatOpen)}
+                >
+                  Our Categories
+                  <span className={styles.arrow}>{isCatOpen ? '−' : '+'}</span>
+                </button>
+                <ul className={`${styles.mobileCategoryList} ${isCatOpen ? styles.catOpen : ''}`}>
+                  {categories.map((cat) => (
+                    <li key={cat.id}>
+                      <Link href={`/categories/${cat.slug}`}>{cat.name}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            )}
           </ul>
 
           <div className={styles.drawerFooter}>
-            <a href="https://wa.me/919825988354?text=Hi, I am interested in your products." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center' }}>
+            <a
+              href="https://wa.me/919825988354?text=Hi, I am interested in your products."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+              style={{ display: 'block', width: '100%', textAlign: 'center' }}
+            >
               Enquire Now
             </a>
           </div>
@@ -168,8 +172,10 @@ export default function Navbar() {
       </div>
 
       {/* Overlay */}
-      <div className={`${styles.overlay} ${isMenuOpen ? styles.overlayVisible : ''}`} onClick={() => setIsMenuOpen(false)}></div>
+      <div
+        className={`${styles.overlay} ${isMenuOpen ? styles.overlayVisible : ''}`}
+        onClick={() => setIsMenuOpen(false)}
+      />
     </>
-
   );
 }

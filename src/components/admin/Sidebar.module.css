@@ -1,0 +1,150 @@
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  height: 100vh;
+  background: #0f172a;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-right: 1px solid #1e293b;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 20px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  background: #2563eb;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+}
+
+.brandName {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.brandSub {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 3px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Nav */
+.nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navLabel {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #475569;
+  padding: 0 10px;
+  margin-bottom: 8px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.navLink:hover {
+  background: #1e293b;
+  color: #f1f5f9;
+}
+
+.navLinkActive {
+  background: #1d4ed8;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
+
+.navLinkActive:hover {
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.navIcon {
+  flex-shrink: 0;
+}
+
+.navChevron {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Footer */
+.sidebarFooter {
+  padding: 16px 20px;
+  border-top: 1px solid #1e293b;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #475569;
+  text-decoration: none;
+  transition: color 0.15s;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  padding: 6px 0;
+}
+
+.backLink:hover {
+  color: #94a3b8;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #ef4444;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 0;
+  width: 100%;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  transition: color 0.15s;
+  margin-top: 4px;
+}
+
+.logoutBtn:hover {
+  color: #dc2626;
+}

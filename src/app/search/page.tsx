@@ -1,19 +1,14 @@
-'use client';
-
-import { useSearchParams } from 'next/navigation';
-import { products } from '@/data/products';
+import { searchProducts } from '@/lib/productService';
 import ProductCard from '@/components/ProductCard';
 import styles from './Search.module.css';
-import { Suspense } from 'react';
 
-function SearchResults() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get('q')?.toLowerCase() || '';
-
-  const filteredProducts = products.filter(p => 
-    p.name.toLowerCase().includes(query) || 
-    p.category.toLowerCase().includes(query)
-  );
+export default async function SearchPage({ 
+  searchParams 
+}: { 
+  searchParams: { q?: string } 
+}) {
+  const query = searchParams.q || '';
+  const filteredProducts = query ? await searchProducts(query) : [];
 
   return (
     <div className={styles.searchPage}>
@@ -29,25 +24,21 @@ function SearchResults() {
           {filteredProducts.length > 0 ? (
             <div className={styles.productGrid}>
               {filteredProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product as any} />
               ))}
             </div>
           ) : (
             <div className={styles.noResults}>
-              <h2>No products found</h2>
-              <p>We couldn't find any products matching your search. Please try different keywords.</p>
+              <h2>{query ? 'No products found' : 'Start searching'}</h2>
+              <p>
+                {query 
+                  ? "We couldn't find any products matching your search. Please try different keywords."
+                  : "Enter a keyword in the search bar above to find products."}
+              </p>
             </div>
           )}
         </div>
       </section>
     </div>
-  );
-}
-
-export default function SearchPage() {
-  return (
-    <Suspense fallback={<div>Loading Search...</div>}>
-      <SearchResults />
-    </Suspense>
   );
 }

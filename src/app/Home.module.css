@@ -72,7 +72,7 @@
 
 .trustGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
@@ -175,6 +175,7 @@
   text-align: center;
 }
 
+.categoryImg,
 .categoryImgWrapper {
   position: relative;
   height: 250px;
@@ -183,6 +184,7 @@
   margin-bottom: 15px;
 }
 
+.categoryImg img,
 .categoryImgWrapper img {
   width: 100%;
   height: 100%;
@@ -190,6 +192,7 @@
   transition: transform 0.5s ease;
 }
 
+.categoryCard:hover .categoryImg img,
 .categoryCard:hover .categoryImgWrapper img {
   transform: scale(1.1);
 }

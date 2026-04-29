@@ -1,19 +1,9 @@
 import Link from 'next/link';
 import styles from './Footer.module.css';
-import { text } from 'stream/consumers';
+import { getCategories } from '@/lib/categoryService';
 
-const categories = [
-  'Stainless steel napkin holder',
-  'Bathroom shelf',
-  'Stainless steel towel rack',
-  'Stainless steel soap dish',
-  'Stainless steel tumbler',
-  'Stainless steel toilet paper holder',
-  'Liquid dispenser',
-  'ABS mirror cabinet',
-];
-
-export default function Footer() {
+export default async function Footer() {
+  const categories = await getCategories();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -30,7 +20,7 @@ export default function Footer() {
             </p>
             <div className={styles.socials}>
               {/* Add social icons here */}
-              <a href="#"><img src="images/facebook.svg" alt="" /></a>
+              <a href="https://www.facebook.com/vinod.patel.142240?rdid=jaa7vRQ2KCxJBOVY&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1K9BziM4kK%2F#"><img src="images/facebook.svg" alt="" /></a>
               <a href="#"><img src="images/instagram.svg" alt="" /></a>
             </div>
           </div>
@@ -39,7 +29,7 @@ export default function Footer() {
             <h3>Categories</h3>
             <ul>
               {categories.slice(0, 5).map(cat => (
-                <li key={cat}><Link href={`/categories/${cat.toLowerCase().replace(/ /g, '-')}`}>{cat}</Link></li>
+                <li key={cat.id}><Link href={`/categories/${cat.slug}`}>{cat.name}</Link></li>
               ))}
             </ul>
           </div>

@@ -1,18 +1,12 @@
 import Link from 'next/link';
+import { getCategories } from '@/lib/categoryService';
 import styles from './Categories.module.css';
 
-const categories = [
-  { name: 'Stainless steel napkin holder', image: '/images/products/napkin-holder.jpeg' },
-  { name: 'Bathroom shelf', image: '/images/products/bathroom-shelf.jpeg' },
-  { name: 'Stainless steel towel rack', image: '/images/products/towel-rack (2).png' },
-  { name: 'Stainless steel soap dish', image: '/images/products/soap-dish.jpeg' },
-  { name: 'Stainless steel tumbler', image: '/images/products/stainless-steel-tumbler.jpeg' },
-  { name: 'Stainless steel toilet paper holder', image: '/images/products/toilet-paper-holder.jpeg' },
-  { name: 'Liquid dispenser', image: '/images/products/liquid-dispenser.jpeg' },
-  { name: 'ABS mirror cabinet', image: '/images/products/abs-mirror-cabinet.jpg' },
-];
+export const dynamic = 'force-dynamic';
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  const categories = await getCategories();
+
   return (
     <div className={styles.categoriesPage}>
       <section className={styles.pageHeader}>
@@ -26,10 +20,10 @@ export default function CategoriesPage() {
         <div className="container">
           <div className={styles.categoryGrid}>
             {categories.map((cat) => (
-              <Link key={cat.name} href={`/categories/${cat.name.toLowerCase().replace(/ /g, '-')}`} className={styles.categoryCard}>
+              <Link key={cat.id} href={`/categories/${cat.slug}`} className={styles.categoryCard}>
                 <div className={styles.cardInner}>
                   <div className={styles.imageWrapper}>
-                    <img src={cat.image} alt={cat.name} />
+                    <img src={cat.image || '/images/category-img.jpg'} alt={cat.name} />
                   </div>
                   <div className={styles.content}>
                     <h3>{cat.name}</h3>
