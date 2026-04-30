@@ -15,8 +15,13 @@ export async function getCategories() {
   }
 }
 
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 function generateSlug(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
@@ -26,12 +31,17 @@ async function saveImage(file: File | null): Promise<string | null> {
   if (!file || file.size === 0 || !file.name || file.name === 'undefined') return null;
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
-  const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '')}`;
-  const uploadDir = join(process.cwd(), 'public', 'uploads');
-  try { await mkdir(uploadDir, { recursive: true }); } catch (e) {}
-  const filepath = join(uploadDir, filename);
-  await writeFile(filepath, buffer);
-  return `/uploads/${filename}`;
+  
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      { folder: 'eshan-enterprise' },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result?.secure_url || null);
+      }
+    );
+    uploadStream.end(buffer);
+  });
 }
 
 export async function createCategory(formData: FormData) {
