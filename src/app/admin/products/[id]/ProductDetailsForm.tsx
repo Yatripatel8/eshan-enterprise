@@ -12,6 +12,8 @@ interface ProductDetails {
   specificFeatures: string | null;
 }
 
+import { useRouter } from 'next/navigation';
+
 export default function ProductDetailsForm({
   productId,
   initialData,
@@ -19,6 +21,7 @@ export default function ProductDetailsForm({
   productId: string;
   initialData: ProductDetails | null;
 }) {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
@@ -28,12 +31,13 @@ export default function ProductDetailsForm({
     setMessage(null);
     const formData = new FormData(e.currentTarget);
     const result = await updateProductDetails(productId, formData);
-    setMessage(
-      result.success
-        ? { type: 'success', text: 'Specifications saved successfully!' }
-        : { type: 'error', text: result.error ?? 'Something went wrong' }
-    );
-    setIsLoading(false);
+    
+    if (result.success) {
+      router.push('/admin/products');
+    } else {
+      setMessage({ type: 'error', text: result.error ?? 'Something went wrong' });
+      setIsLoading(false);
+    }
   };
 
   return (

@@ -17,25 +17,41 @@ export default function CategoryClient({ initialCategories }: { initialCategorie
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  const openAdd = () => { setEditingCategory(null); setIsModalOpen(true); };
-  const openEdit = (cat: Category) => { setEditingCategory(cat); setIsModalOpen(true); };
-  const closeModal = () => { setIsModalOpen(false); setEditingCategory(null); };
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setPreviewUrl(URL.createObjectURL(file));
+    } else {
+      setPreviewUrl(null);
+    }
+  };
+
+  const openAdd = () => { setEditingCategory(null); setIsModalOpen(true); setPreviewUrl(null); };
+  const openEdit = (cat: Category) => { setEditingCategory(cat); setIsModalOpen(true); setPreviewUrl(null); };
+  const closeModal = () => { setIsModalOpen(false); setEditingCategory(null); setPreviewUrl(null); };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const formData = new FormData(e.currentTarget);
-    const result = editingCategory
-      ? await updateCategory(editingCategory.id, formData)
-      : await createCategory(formData);
-    if (result.success) {
-      closeModal();
-      window.location.reload();
-    } else {
-      alert(result.error);
+    try {
+      const formData = new FormData(e.currentTarget);
+      const result = editingCategory
+        ? await updateCategory(editingCategory.id, formData)
+        : await createCategory(formData);
+      if (result.success) {
+        closeModal();
+        window.location.reload();
+      } else {
+        alert(result.error);
+      }
+    } catch (error) {
+      console.error('Error submitting category:', error);
+      alert('An unexpected error occurred. If the file is too large, try uploading a smaller image.');
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const handleDelete = async (id: string, name: string) => {
@@ -68,7 +84,6 @@ export default function CategoryClient({ initialCategories }: { initialCategorie
             <tr>
               <th className={styles.th}>Image</th>
               <th className={styles.th}>Name</th>
-              <th className={styles.th}>Slug</th>
               <th className={styles.th}>Products</th>
               <th className={styles.th}>Actions</th>
             </tr>
@@ -90,9 +105,6 @@ export default function CategoryClient({ initialCategories }: { initialCategorie
                   </td>
                   <td className={styles.td}>
                     <p className={styles.cellName}>{cat.name}</p>
-                  </td>
-                  <td className={styles.td}>
-                    <span className={`${styles.badge} ${styles.badgeGray}`}>{cat.slug}</span>
                   </td>
                   <td className={styles.td}>
                     <span className={styles.badge}>{cat._count?.products ?? 0} products</span>
@@ -131,12 +143,14 @@ export default function CategoryClient({ initialCategories }: { initialCategorie
                   <input name="name" required defaultValue={editingCategory?.name ?? ''} className={styles.input} placeholder="e.g. Bathroom Shelf" />
                 </div>
                 <div className={styles.field}>
-                  <label className={styles.label}>Slug *</label>
-                  <input name="slug" required defaultValue={editingCategory?.slug ?? ''} className={styles.input} placeholder="e.g. bathroom-shelf" />
-                </div>
-                <div className={styles.field}>
-                  <label className={styles.label}>Image URL</label>
-                  <input name="image" defaultValue={editingCategory?.image ?? ''} className={styles.input} placeholder="https://..." />
+                  <label className={styles.label}>Image</label>
+                  {(previewUrl || editingCategory?.image) && (
+                    <div style={{ marginBottom: '8px' }}>
+                      <img src={previewUrl || editingCategory?.image || ''} alt="Preview" style={{ height: '60px', borderRadius: '4px', objectFit: 'cover' }} />
+                    </div>
+                  )}
+                  <input type="file" accept="image/*" name="imageFile" onChange={handleImageChange} className={styles.input} style={{ padding: '8px' }} />
+                  <input type="hidden" name="existingImage" value={editingCategory?.image ?? ''} />
                 </div>
               </div>
               <div className={styles.modalFooter}>

@@ -15,12 +15,37 @@ export async function getProducts() {
   }
 }
 
+import { writeFile, mkdir } from 'fs/promises';
+import { join } from 'path';
+
+function generateSlug(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
+}
+
+async function saveImage(file: File | null): Promise<string | null> {
+  if (!file || file.size === 0 || !file.name || file.name === 'undefined') return null;
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+  const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '')}`;
+  const uploadDir = join(process.cwd(), 'public', 'uploads');
+  try { await mkdir(uploadDir, { recursive: true }); } catch (e) {}
+  const filepath = join(uploadDir, filename);
+  await writeFile(filepath, buffer);
+  return `/uploads/${filename}`;
+}
+
 export async function createProduct(formData: FormData) {
   const name = formData.get('name') as string;
-  const slug = formData.get('slug') as string;
-  const image = formData.get('image') as string;
+  const slug = generateSlug(name);
   const shortDescription = formData.get('shortDescription') as string;
   const categoryId = formData.get('categoryId') as string;
+
+  const imageFile = formData.get('imageFile') as File | null;
+  const existingImage = formData.get('existingImage') as string;
+  let image = existingImage || '';
+  if (imageFile && imageFile.size > 0 && imageFile.name !== 'undefined') {
+    image = (await saveImage(imageFile)) || image;
+  }
 
   try {
     const product = await prisma.product.create({
@@ -37,18 +62,27 @@ export async function createProduct(formData: FormData) {
     });
     revalidatePath('/admin/products');
     return { success: true, id: product.id };
-  } catch (error) {
-    console.error('Error creating product:', error);
-    return { error: 'Failed to create product' };
+  } catch (error: any) {
+    console.error('Error:', error);
+    if (error.code === 'P2002') {
+      return { error: 'A product with a similar name already exists.' };
+    }
+    return { error: 'Failed to save product' };
   }
 }
 
 export async function updateProduct(id: string, formData: FormData) {
   const name = formData.get('name') as string;
-  const slug = formData.get('slug') as string;
-  const image = formData.get('image') as string;
+  const slug = generateSlug(name);
   const shortDescription = formData.get('shortDescription') as string;
   const categoryId = formData.get('categoryId') as string;
+
+  const imageFile = formData.get('imageFile') as File | null;
+  const existingImage = formData.get('existingImage') as string;
+  let image = existingImage || '';
+  if (imageFile && imageFile.size > 0 && imageFile.name !== 'undefined') {
+    image = (await saveImage(imageFile)) || image;
+  }
 
   try {
     await prisma.product.update({
@@ -57,9 +91,12 @@ export async function updateProduct(id: string, formData: FormData) {
     });
     revalidatePath('/admin/products');
     return { success: true };
-  } catch (error) {
-    console.error('Error updating product:', error);
-    return { error: 'Failed to update product' };
+  } catch (error: any) {
+    console.error('Error:', error);
+    if (error.code === 'P2002') {
+      return { error: 'A product with a similar name already exists.' };
+    }
+    return { error: 'Failed to save product' };
   }
 }
 

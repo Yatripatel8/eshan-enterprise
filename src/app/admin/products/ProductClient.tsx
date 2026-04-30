@@ -43,25 +43,41 @@ export default function ProductClient({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  const openAdd = () => { setEditingProduct(null); setIsModalOpen(true); };
-  const openEdit = (p: Product) => { setEditingProduct(p); setIsModalOpen(true); };
-  const closeModal = () => { setIsModalOpen(false); setEditingProduct(null); };
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setPreviewUrl(URL.createObjectURL(file));
+    } else {
+      setPreviewUrl(null);
+    }
+  };
+
+  const openAdd = () => { setEditingProduct(null); setIsModalOpen(true); setPreviewUrl(null); };
+  const openEdit = (p: Product) => { setEditingProduct(p); setIsModalOpen(true); setPreviewUrl(null); };
+  const closeModal = () => { setIsModalOpen(false); setEditingProduct(null); setPreviewUrl(null); };
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const formData = new FormData(e.currentTarget);
-    const result = editingProduct
-      ? await updateProduct(editingProduct.id, formData)
-      : await createProduct(formData);
-    if (result.success) {
-      closeModal();
-      window.location.reload();
-    } else {
-      alert(result.error);
+    try {
+      const formData = new FormData(e.currentTarget);
+      const result = editingProduct
+        ? await updateProduct(editingProduct.id, formData)
+        : await createProduct(formData);
+      if (result.success) {
+        closeModal();
+        window.location.reload();
+      } else {
+        alert(result.error);
+      }
+    } catch (error) {
+      console.error('Error submitting product:', error);
+      alert('An unexpected error occurred. If the file is too large, try uploading a smaller image.');
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const handleDelete = async (id: string, name: string) => {
@@ -120,7 +136,6 @@ export default function ProductClient({
                   </td>
                   <td className={styles.td}>
                     <p className={styles.cellName}>{prod.name}</p>
-                    <p className={styles.cellMeta}>{prod.slug}</p>
                   </td>
                   <td className={styles.td}>
                     <span className={`${styles.badge} ${styles.badgeGray}`}>{prod.category.name}</span>
@@ -166,10 +181,6 @@ export default function ProductClient({
                   <input name="name" required defaultValue={editingProduct?.name ?? ''} className={styles.input} placeholder="e.g. Wave Napkin Holder" />
                 </div>
                 <div className={styles.field}>
-                  <label className={styles.label}>Slug *</label>
-                  <input name="slug" required defaultValue={editingProduct?.slug ?? ''} className={styles.input} placeholder="e.g. wave-napkin-holder" />
-                </div>
-                <div className={styles.field}>
                   <label className={styles.label}>Category *</label>
                   <select name="categoryId" required defaultValue={editingProduct?.categoryId ?? ''} className={styles.select}>
                     <option value="">Select a category</option>
@@ -179,8 +190,14 @@ export default function ProductClient({
                   </select>
                 </div>
                 <div className={styles.field}>
-                  <label className={styles.label}>Image URL</label>
-                  <input name="image" defaultValue={editingProduct?.image ?? ''} className={styles.input} placeholder="https://..." />
+                  <label className={styles.label}>Image</label>
+                  {(previewUrl || editingProduct?.image) && (
+                    <div style={{ marginBottom: '8px' }}>
+                      <img src={previewUrl || editingProduct?.image || ''} alt="Preview" style={{ height: '60px', borderRadius: '4px', objectFit: 'cover' }} />
+                    </div>
+                  )}
+                  <input type="file" accept="image/*" name="imageFile" onChange={handleImageChange} className={styles.input} style={{ padding: '8px' }} />
+                  <input type="hidden" name="existingImage" value={editingProduct?.image ?? ''} />
                 </div>
                 <div className={styles.field}>
                   <label className={styles.label}>Short Description</label>
