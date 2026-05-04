@@ -5,9 +5,10 @@ import styles from './Search.module.css';
 export default async function SearchPage({ 
   searchParams 
 }: { 
-  searchParams: { q?: string } 
+  searchParams: Promise<{ q?: string }> 
 }) {
-  const query = searchParams.q || '';
+  const resolvedParams = await searchParams;
+  const query = resolvedParams.q || '';
   const filteredProducts = query ? await searchProducts(query) : [];
 
   return (
