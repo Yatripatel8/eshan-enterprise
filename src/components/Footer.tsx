@@ -18,10 +18,11 @@ export default async function Footer() {
               Premium stainless steel bath accessories.
               We guarantee innovation, quality, and style to modern homes across India.
             </p>
-            <div className={styles.socials}>
+            <div className={styles.socias}>
               {/* Add social icons here */}
-              <a href="https://www.facebook.com/vinod.patel.142240?rdid=jaa7vRQ2KCxJBOVY&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1K9BziM4kK%2F#"><img src="images/facebook.svg" alt="" /></a>
-              <a href="#"><img src="images/instagram.svg" alt="" /></a>
+              <p style={{ marginBottom: '5px' }}>Visit our Facebook page:</p>
+              <a href="https://www.facebook.com/vinod.patel.142240?rdid=B6QI2wvFHfoqMDut&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1K9BziM4kK%2F#" target="_blank"><img src="images/facebook-new-logo.png" alt="Facebook" /></a>
+
             </div>
           </div>
 

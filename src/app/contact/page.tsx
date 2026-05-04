@@ -22,7 +22,7 @@ export default function Contact() {
                 <div className={styles.infoItem}>
                   <div className={styles.infoIcon}>📍</div>
                   <div>
-                    <h3>Our Shop Address</h3>
+                    <h3>Our Office Address</h3>
                     <p>DG-1, Vishwa Residency,
                       Nr. Vishramnagar, Gurukul Road,
                       Memnagar, Ahmedabad – 380052
@@ -89,9 +89,9 @@ export default function Contact() {
       </section>
 
       <section className={styles.mapSection}>
-        <a 
-          href="https://www.google.com/maps/dir//Vishwa+Residency,+VISHRAM+NAGAR+CO-OPERATIVE+SOCIETY,+9,+Gurukul+Rd,+Tarun+Nagar+Part+1,+Tarun+Nagar+Part+2,+Memnagar,+Ahmedabad,+Gujarat+380052/@23.1001633,72.4307577,10z/data=!4m8!4m7!1m0!1m5!1m1!1s0x395e84a7cae10dc1:0xf062a54bf92c0f88!2m2!1d72.5334677!2d23.0552987?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D" 
-          target="_blank" 
+        <a
+          href="https://www.google.com/maps/dir//Vishwa+Residency,+VISHRAM+NAGAR+CO-OPERATIVE+SOCIETY,+9,+Gurukul+Rd,+Tarun+Nagar+Part+1,+Tarun+Nagar+Part+2,+Memnagar,+Ahmedabad,+Gujarat+380052/@23.1001633,72.4307577,10z/data=!4m8!4m7!1m0!1m5!1m1!1s0x395e84a7cae10dc1:0xf062a54bf92c0f88!2m2!1d72.5334677!2d23.0552987?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank"
           className={styles.mapLink}
         >
           <img src="/images/map.png" alt="Eshan Enterprise Ahmedabad Location" className={styles.mapImage} />

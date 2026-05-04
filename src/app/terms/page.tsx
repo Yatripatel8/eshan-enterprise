@@ -16,15 +16,24 @@ export default function TermsPage() {
           <div className={styles.content}>
             <h2>1. Acceptance of Terms</h2>
             <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.</p>
-            
-            <h2>2. Use of License</h2>
-            <p>Permission is granted to temporarily download one copy of the materials (information or software) on Eshan Enterprise's website for personal, non-commercial transitory viewing only.</p>
-            
-            <h2>3. Disclaimer</h2>
-            <p>The materials on Eshan Enterprise's website are provided on an 'as is' basis. Eshan Enterprise makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
-            
-            <h2>4. Limitations</h2>
-            <p>In no event shall Eshan Enterprise or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Eshan Enterprise's website.</p>
+
+            <h2>2. Use of Website</h2>
+            <p>The content on this website is provided for informational purposes only. You may view and not use the product images for personal or non-commercial purposes.</p>
+
+            <h2>3. Product Information</h2>
+            <p>We strive to provide accurate product information. However, product specifications, designs, and availability may change in some case without prior notice.</p>
+
+            <h2>4.Intellectual Property</h2>
+            <p>All product images and materials on this website are the property of Eshan Enterprise and may not be copied, reproduced, or distributed without permission.</p>
+
+            <h2>5. Limitations of Liability</h2>
+            <p>Eshan Enterprise shall not be liable for any damages arising from the use or inability to use the materials.</p>
+
+            <h2>6. Inquiry Disclaimer</h2>
+            <p>Submitting an inquiry through this website does not create any contractual obligation or guarantee of product availability.</p>
+
+            <h2>7. Changes to Terms</h2>
+            <p>We reserve the right to update or modify these Terms at any time without prior notice.</p>
           </div>
           <Link href="/" className="btn btn-primary">Back to Home</Link>
         </div>

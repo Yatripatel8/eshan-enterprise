@@ -16,7 +16,7 @@ export async function login(prevState: { error?: string } | null, formData: Form
 
 
   const validEmail = process.env.ADMIN_EMAIL ?? 'patelvinod408@gmail.com';
-  const validPassword = process.env.ADMIN_PASSWORD ?? 'qUIhfewk76384!@#h45';
+  const validPassword = process.env.ADMIN_PASSWORD ?? 'PatelVinod54321';
 
   if (email !== validEmail || password !== validPassword) {
     return { error: 'Invalid email or password.' };

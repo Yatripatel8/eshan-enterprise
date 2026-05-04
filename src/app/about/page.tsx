@@ -18,7 +18,7 @@ export default function About() {
               <h6>Our Story</h6>
               <h2>Eshan Enterprise – Pioneers in Premium Bath Solutions</h2>
               <p>
-                Established in 1995, Eshan Enterprise has been a trusted supplier of high-quality stainless steel and acrylic bath accessories and bathroom fittings across India for over 25 years.
+                Established in 1995, Eshan Enterprise has been a trusted supplier of high-quality stainless steel, glass, acrylic bathroom shelf, bathroom fittings and accessories across India for over 25 years.
               </p>
               <p>
                 Our commitment goes beyond products—we provide innovative designs and durable finishes that meet the evolving needs of builders, dealers, and modern homeowners.
@@ -39,7 +39,7 @@ export default function About() {
               </div>
             </div>
             <div className={styles.storyImage}>
-              <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1000" alt="Factory" />
+              <img src="/images/about-us.jpg" alt="Factory" />
             </div>
           </div>
         </div>
@@ -71,26 +71,29 @@ export default function About() {
         </div>
       </section>
 
-      {/* <section className={`section ${styles.teamSection}`}>
+      <section className={`section ${styles.teamSection}`}>
         <div className="container">
           <div className={styles.teamGrid}>
             <div className={styles.teamContent}>
-              <h2>Manufacturing Excellence</h2>
+              <h2>Built with Quality. Designed for Everyday Use.</h2>
               <p>
-                Our production facility is equipped with state-of-the-art machinery to ensure precision in every curve and finish. We follow strict quality control protocols at every stage, from material sourcing to final polishing.
+                At Eshan Enterprise, we specialize in manufacturing premium stainless steel bathroom accessories including glass shelves, acrylic shelves, napkin holders, towel rings, soap stands, and utility fittings built for modern homes and commercial spaces.
               </p>
+              <p>Our focus is simple: Complete bathroom accessory solutions for every need.</p>
               <ul className={styles.featureList}>
-                <li>Advanced CNC Machining</li>
-                <li>PVD Nano Coating Technology</li>
+                <li>Durable Material</li>
+                <li>Precise Finishing</li>
                 <li>Skilled Craftsmanship</li>
-                <li>Rigorous Quality Testing</li>
+                <li>Practical Designs</li>
               </ul>
             </div>
             <div className={styles.teamImage}>
-              <img src="https://images.unsplash.com/photo-1504307651254-35680f4f4ff5?q=80&w=1000" alt="Manufacturing" />
+              <img src="/images/premium-product.jpg" alt="Manufacturing" />
             </div>
           </div>
         </div>
+      </section>
+
       {/* CTA Section */}
       <section className={styles.ctaBanner}>
         <div className="container">

@@ -13,7 +13,7 @@
   --text-main: #1a1a1a;
   --text-muted: #666;
   --bg-main: #ffffff;
-  --bg-alt: #f8f9fa;
+  --bg-alt: #f8f8f8;
   --border-color: #eee;
 
   /* Typography */
@@ -120,8 +120,13 @@ img {
 }
 
 /* ── Utility helpers used by page components ── */
-.bg-light { background-color: var(--bg-alt); }
-.text-center { text-align: center; }
+.bg-light {
+  background-color: var(--bg-alt);
+}
+
+.text-center {
+  text-align: center;
+}
 
 .section-header {
   display: flex;

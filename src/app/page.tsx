@@ -26,7 +26,7 @@ export default async function Home() {
         </div>
       </section>
 
-      
+
 
       {/* Categories Preview */}
       <section className="section bg-light">
@@ -66,7 +66,7 @@ export default async function Home() {
         </div>
       </section>
 
-       {/* Who We Are */}
+      {/* Who We Are */}
       <section className={styles.infoSection}>
         <div className="container">
           <div className={styles.infoGrid}>
@@ -110,7 +110,7 @@ export default async function Home() {
         <div className="container">
           <div className={styles.infoGrid}>
             <div className={styles.infoImageWrapper}>
-              <img src="/images/why-choose-us.jpg" alt="Quality Excellence" />
+              <img src="/images/new-why-choose-us.jpg" alt="Quality Excellence" />
             </div>
             <div className={styles.infoContent}>
               <h2>💎 Why Choose Us</h2>
