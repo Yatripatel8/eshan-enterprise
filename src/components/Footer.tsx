@@ -32,6 +32,9 @@ export default async function Footer() {
               {categories.slice(0, 5).map(cat => (
                 <li key={cat.id}><Link href={`/categories/${cat.slug}`}>{cat.name}</Link></li>
               ))}
+              {categories.length > 5 && (
+                <li><Link href="/categories">View All &#8594;</Link></li>
+              )}
             </ul>
           </div>
 
