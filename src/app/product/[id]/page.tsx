@@ -53,9 +53,12 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <h3>Specifications</h3>
                 <ul>
                   {specs.map(s => (
+                    
                     <li key={s.label}>
-                      <strong>{s.label}:</strong> {s.value}
+                      <strong>{s.label}:</strong> 
+                      <p>{s.value}</p>
                     </li>
+                    
                   ))}
                 </ul>
               </div>
