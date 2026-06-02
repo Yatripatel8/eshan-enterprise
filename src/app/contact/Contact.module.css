@@ -183,8 +183,77 @@
   }
 }
 
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.popup {
+  background: white;
+  border-radius: 12px;
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.popupClose {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  line-height: 1;
+  padding: 5px;
+  transition: var(--transition);
+}
+
+.popupClose:hover {
+  color: var(--primary);
+}
+
+.popupIcon {
+  width: 70px;
+  height: 70px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 25px;
+}
+
+.popup h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--secondary);
+}
+
+.popup p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
 @media (max-width: 600px) {
   .formRow {
     grid-template-columns: 1fr;
+  }
+
+  .popup {
+    padding: 40px 25px;
   }
 }

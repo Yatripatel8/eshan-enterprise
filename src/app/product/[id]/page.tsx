@@ -73,14 +73,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               >
                 Enquire on WhatsApp
               </a>
-              <a
-                href="https://wa.me/919825988354?text=Hi%2C%20I%20have%20an%20inquiry%20about%20your%20products."
-                className="btn btn-outline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Send Inquiry
-              </a>
+
             </div>
 
             <p className={styles.trustText}>🛡️ 100% Genuine Product &nbsp;|&nbsp; 📦 Fast Shipping</p>

@@ -8,6 +8,10 @@
   margin-bottom: 40px;
 }
 
+.breadcrumb a {
+  color: var(--text-muted);
+}
+
 .breadcrumb a:hover {
   color: var(--primary);
 }

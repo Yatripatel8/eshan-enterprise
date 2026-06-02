@@ -1,4 +1,5 @@
 import styles from './Contact.module.css';
+import ContactForm from './ContactForm';
 
 export default function Contact() {
   return (
@@ -61,28 +62,7 @@ export default function Contact() {
             </div>
 
             <div className={styles.contactFormWrapper}>
-              <form className={styles.contactForm}>
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label>Full Name</label>
-                    <input type="text" placeholder="Your Name" required />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Email Address</label>
-                    <input type="email" placeholder="Your Email" required />
-                  </div>
-                </div>
-                <div className={styles.formGroup}>
-                  <label>Phone Number</label>
-                  <input type="tel" placeholder="Your Phone" required />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label>Message</label>
-                  <textarea rows={5} placeholder="How can we help you?" required></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Send Message</button>
-              </form>
+              <ContactForm />
             </div>
           </div>
         </div>
