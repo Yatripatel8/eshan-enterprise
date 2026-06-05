@@ -44,7 +44,7 @@ export default function Navbar({ categories = [] }: { categories?: Category[] })
       <nav className={styles.navbar}>
         <div className={`container ${styles.navContainer}`}>
           <Link href="/" className={styles.logo}>
-            <img src="images/logo-eshan.svg" width={150} height={120} alt="Eshan Enterprise" />
+            <img src="/images/logo-eshan.svg" width={150} height={120} alt="Eshan Enterprise" />
           </Link>
 
           {/* Desktop Links */}
@@ -117,7 +117,7 @@ export default function Navbar({ categories = [] }: { categories?: Category[] })
       <div className={`${styles.mobileDrawer} ${isMenuOpen ? styles.drawerOpen : ''}`}>
         <div className={styles.drawerHeader}>
           <Link href="/" className={styles.logo}>
-            <img src="images/logo-eshan.svg" width={130} height={100} alt="Eshan Enterprise" />
+            <img src="/images/logo-eshan.svg" width={130} height={100} alt="Eshan Enterprise" />
           </Link>
           <button className={styles.closeBtn} onClick={() => setIsMenuOpen(false)}>&times;</button>
         </div>

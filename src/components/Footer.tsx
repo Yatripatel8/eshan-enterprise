@@ -12,7 +12,7 @@ export default async function Footer() {
         <div className={styles.footerGrid}>
           <div className={styles.footerBrand}>
             <Link href="/" className={styles.logo}>
-              <img src="images/logo-eshan.svg" style={{ color: ' transparent', filter: 'brightness(0) invert(1)' }} width={200} height={150} alt="" />
+              <img src="/images/logo-eshan.svg" style={{ color: ' transparent', filter: 'brightness(0) invert(1)' }} width={200} height={150} alt="" />
             </Link>
             <p className={styles.description}>
               Premium stainless steel bath accessories.
