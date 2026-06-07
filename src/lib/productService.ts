@@ -1,5 +1,29 @@
 import prisma from "@/lib/prisma";
 
+export async function getAllProducts() {
+  try {
+    return await prisma.product.findMany({
+      select: { id: true, name: true, slug: true },
+      orderBy: { name: 'asc' },
+    });
+  } catch (error) {
+    console.error("Error fetching all products:", error);
+    return [];
+  }
+}
+
+export async function getAllProductsWithDetails() {
+  try {
+    return await prisma.product.findMany({
+      orderBy: { name: 'asc' },
+      include: { category: true },
+    });
+  } catch (error) {
+    console.error("Error fetching all products with details:", error);
+    return [];
+  }
+}
+
 export async function getFeaturedProducts() {
   try {
     return await prisma.product.findMany({

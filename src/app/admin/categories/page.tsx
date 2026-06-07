@@ -1,12 +1,5 @@
-import { getCategories } from '@/lib/actions/category';
-import CategoryClient from './CategoryClient';
+import AdminNotice from '@/app/admin/_AdminNotice';
 
-export const dynamic = 'force-dynamic';
-
-export default async function AdminCategoriesPage() {
-  const categories = await getCategories();
-
-  return (
-    <CategoryClient initialCategories={categories as any} />
-  );
+export default function Page() {
+  return <AdminNotice />;
 }

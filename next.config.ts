@@ -1,23 +1,25 @@
 import type { NextConfig } from "next";
 
+const isStaticExport = process.env.NEXT_EXPORT === 'true';
+
 const nextConfig: NextConfig = {
-  output: 'standalone',
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
-  },
-  // Hostinger specific optimizations
+  ...(isStaticExport
+    ? {
+        output: 'export',
+        trailingSlash: true,
+        images: { unoptimized: true },
+      }
+    : {
+        output: 'standalone',
+        images: {
+          remotePatterns: [{ protocol: 'https', hostname: '**' }],
+        },
+        experimental: {
+          serverActions: { bodySizeLimit: '10mb' },
+        },
+      }),
   poweredByHeader: false,
   reactStrictMode: true,
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '10mb',
-    },
-  },
 };
 
 export default nextConfig;

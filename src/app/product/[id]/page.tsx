@@ -1,7 +1,12 @@
-import { getProductById } from '@/lib/productService';
+import { getProductById, getAllProducts } from '@/lib/productService';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import styles from './ProductDetail.module.css';
+
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((p) => ({ id: p.id }));
+}
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

@@ -1,9 +1,14 @@
-import { getCategoryBySlug } from '@/lib/categoryService';
+import { getCategoryBySlug, getCategories } from '@/lib/categoryService';
 import { getProductsByCategory } from '@/lib/productService';
 import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import styles from './CategoryDetail.module.css';
+
+export async function generateStaticParams() {
+  const categories = await getCategories();
+  return categories.map((cat) => ({ slug: cat.slug }));
+}
 
 export default async function CategoryDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

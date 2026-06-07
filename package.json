@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "build:static": "node scripts/build-static.mjs",
     "deploy:prepare": "npm run build && powershell -Command \"xcopy /E /I /Y public .next\\standalone\\public; xcopy /E /I /Y .next\\static .next\\standalone\\.next\\static\""
   },
   "dependencies": {

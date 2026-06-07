@@ -4,8 +4,6 @@ import { getCategories } from '@/lib/categoryService';
 import ProductCard from '@/components/ProductCard';
 import styles from './Home.module.css';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Home() {
   const [featuredProducts, categories] = await Promise.all([
     getFeaturedProducts(),
